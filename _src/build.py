@@ -808,7 +808,7 @@ def city_hub(c):
     hero_img = ph(h["photo"], "", "width:100%;min-height:440px", eager=True)  # claim the hero photo before the cards
     cards = ""
     for i, p in enumerate(pages_sorted):
-        cards += (f'<a class="card card-link reveal" href="{link(base + p["slug"] + "/")}">{ph(p["photo"], TONES[i % len(TONES)])}'
+        cards += (f'<a class="card card-link reveal" href="{link(base + p["slug"] + "/")}">{ph(p["photo"] if p["photo"] != h["photo"] else "LA company celebration", TONES[i % len(TONES)])}'
                   f'<div class="card-body"><h3>{esc(p["name"])}</h3><p>{esc(p["card"])}</p></div></a>')
     areas = "".join(f'<div class="hub-list-item"><h3 style="font-size:22px;margin-bottom:8px">{esc(n)}</h3><p style="color:var(--muted)">{esc(", ".join(towns))}.</p></div>'
                     for n, towns in h["areas"])
