@@ -74,7 +74,7 @@ def hub(d):
                                   f"Event Planning in {d['city']}, *Done Right.*",
                                   f"Big Ideas for *{d['city']} Events.*"]),
         intro=f"{d['hook']} Hop To It Events plans and produces corporate events, team building, food truck catering, brand activations and community festivals for organizations in {lst(d['districts'], 3)}, and throughout {d['region']}.",
-        cta=f"Plan Your {d['short'] if len(d['short']) < 14 else d['city']} Event", photo="City event hero",
+        cta=f"Plan Your {d['short'] if len(d['short']) < 14 else d['city']} Event", photo=d.get("hero", "City event hero"),
         services_title=f"Event Planning Services in {d['city']}",
         local=(f"Planning an Event in {d['city']}",
                f"Popular venue types here include {lst(d['venues'])}. The best outdoor window is {d['outdoor']}. {d['weather']} "
@@ -116,7 +116,7 @@ def svc_pages(d):
                                f"{city} Corporate Events, *Planned and Produced.*",
                                f"Make Your Next {city} Company Event *Worth Showing Up For.*"]),
         intro=f"{city}'s {lst(ind, 3)} employers host everything from all-hands celebrations to client receptions. Hop To It Events plans and produces corporate events for teams in {lst(dist, 3)}, handling the concept, venue, food and beverage, entertainment and on-site management.",
-        cta="Get a Corporate Event Quote", form_type="Corporate Event", photo="LA company celebration",
+        cta="Get a Corporate Event Quote", form_type="Corporate Event", photo=d.get("hero", "LA company celebration"),
         cards_title="Corporate Events We Create",
         cards=[("Company Celebrations & Holiday Parties", "Milestones, year-end parties and all-hands celebrations with great food and entertainment."),
                ("Employee Appreciation Events", "Food truck lunches, office festivals and recognition events.", "employee-appreciation"),

@@ -72,6 +72,7 @@ city(slug="chicago", city="Chicago", state="IL", short="Chicago", region="Chicag
             ("North & Northwest Side", ["Lincoln Park", "Lakeview", "Wicker Park", "Logan Square", "Evanston"]),
             ("Suburbs", ["Schaumburg", "Oak Brook", "Naperville", "Rosemont", "Skokie"])],
      nearby=["milwaukee", "quad-cities", "indianapolis", "detroit", "madison"], worked=True,
+     hero="Chicago skyline reception",
      note="Hop To It has produced festivals in Chicago, including Wing Fest, along with corporate and brand events at venues like STK Chicago.")
 
 city(slug="las-vegas", city="Las Vegas", state="NV", short="Vegas", region="the Las Vegas Valley",

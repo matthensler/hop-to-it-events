@@ -164,6 +164,7 @@ OVERRIDE_ALT = {
   "On-Site Event Management": "Guests enjoying food in a busy outdoor crowd at Say Cheese Fest",
   "VIP & Media Events": "Rows of branded gift bags lined up for VIP guests before an event in a grand marble hall",
   "City event hero": "Guests mingling and sampling drinks at a packed Hop To It tasting event with a city skyline backdrop",
+  "Chicago skyline reception": "Guests networking at a golden-hour rooftop reception in Chicago, with the Willis Tower behind them",
   "Decor & Event Styling": "Gold and silver balloon ceiling over a packed bar during a celebration at STK Chicago",
   "Food Truck Parties": "Coffee truck crew smiling from the service window at Donut Fest in Phoenix",
   "Tents & Outdoor Event Equipment": "Vendor tents and guests at a sunny outdoor Hop To It food festival",
