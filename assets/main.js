@@ -111,9 +111,10 @@
         btn.disabled = true;
         fetch(url, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(data) })
           .then(function () {
+            var lead = { form_name: data.get('form'), event_type: data.get('event_type') || '', page_path: location.pathname };
+            if (typeof window.gtag === 'function') window.gtag('event', 'generate_lead', lead);
             window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({ event: 'generate_lead', form_name: data.get('form'),
-              event_type: data.get('event_type') || '', page_path: location.pathname });
+            window.dataLayer.push(Object.assign({ event: 'website_lead' }, lead));
             form.reset();
             note.className = 'form-note show';
             note.textContent = 'Thanks! We got your request and will be in touch soon.';

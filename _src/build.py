@@ -65,7 +65,8 @@ GCL = "https://globalchefleague.com"
 
 # Google Apps Script web app URL (see _src/google-apps-script.gs and README "Leads").
 # Leave empty and forms fall back to opening the visitor's email app.
-GTM_ID = "GTM-KLKNGPX8"  # Google Tag Manager container
+GTM_ID = "GTM-KLKNGPX8"  # Google Tag Manager container (don't also add a GA4 tag inside it)
+GA4_ID = "G-N19S7PLWH4"  # Google Analytics 4 measurement ID
 LEADS_URL = "https://script.google.com/macros/s/AKfycbwmjAIhKdDtkGFeoEN6RQR_A7u6uX6mOk1NcdM7VwKH8TmKuh1J5seDjRJ-FtLqRSQ/exec"
 FORM_NOTE = ("Thanks! We got your request and will be in touch soon." if LEADS_URL
              else "Your email app should open with your details filled in. Just hit send.")
@@ -337,6 +338,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 }})(window,document,'script','dataLayer','{GTM_ID}');</script>
 <!-- End Google Tag Manager -->
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={GA4_ID}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','{GA4_ID}');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title>
