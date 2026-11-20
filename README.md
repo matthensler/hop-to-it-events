@@ -61,12 +61,63 @@ If you want this on `hoptoit.events` or `www.hoptoit.events`:
 
 ## File Structure
 
+Every page lives in its own folder so URLs are short: `/corporate-event-planning/`,
+`/locations/los-angeles/food-truck-catering/`.
+
 ```
-hop-to-it-events/
-├── index.html    ← Entire site (single file, no dependencies)
-├── CNAME         ← Custom domain config for GitHub Pages
-└── README.md     ← This file
+index.html                     Home
+services/                      All services hub
+<15 service folders>/          corporate-event-planning, food-truck-catering, brand-activations, ...
+locations/                     Locations hub
+locations/los-angeles/         LA hub + 8 LA service pages
+events/  about/  plan-your-event/
+404.html  donutfestvegas.html  privacypolicy.html
+sitemap.xml  robots.txt  llms.txt   Search + AI crawler files (generated)
+assets/                        styles.css, main.js, self-hosted fonts, logo, share image
+_src/                          Build script and page copy (not served)
+CNAME
 ```
+
+## Editing
+
+1. Copy lives in `_src/services.py` (service pages), `_src/locations.py` (city pages) and
+   `_src/build.py` (home, events, about, plan, shared header/footer).
+2. Run `python3 _src/build.py` from the repo root. It regenerates every page, the sitemap,
+   robots.txt and llms.txt. (`--preview` builds links that work when opening files directly.)
+3. Commit everything, including the generated files.
+
+City page rollout: `PUBLISH_PHASE` in `_src/locations.py` controls which LA pages are indexed.
+Phase 2 pages are built but marked noindex and left out of the sitemap until you raise it to 2.
+
+Photos: `_src/photos.py` is the shot list. Save each photo as `assets/photos/<key>.jpg`
+(e.g. `chef-battle-teams.jpg`) and rebuild; one photo fills every slot that shares it. Edit the
+alt text there to describe the real photo.
+
+Social links: add URLs to `SOCIAL` in `_src/build.py`; they appear in the footer and structured data.
+
+## Leads (Google Sheet + email alert)
+
+Both forms (Plan Your Event and the food truck quote) can save every submission to a Google
+Sheet and email you each lead. Until it's set up, forms open the visitor's email app instead.
+
+1. Create a new Google Sheet (e.g. "Hop To It Leads") in the Google account that should own the leads.
+2. Extensions > Apps Script. Delete the sample code, paste in `_src/google-apps-script.gs`, save.
+   Change `NOTIFY` at the top if alerts should go somewhere other than matt@hoptoit.events.
+3. Pick `testLead` in the function menu and click Run. Approve the permissions (Google warns it's
+   "unverified" because it's your own script: Advanced > Go to project). Check that a "Leads" tab
+   appeared with a test row and that the alert email arrived.
+4. Deploy > New deployment > type Web app. Execute as: Me. Who has access: Anyone. Deploy and
+   copy the Web app URL (ends in /exec).
+5. Paste it into `LEADS_URL` in `_src/build.py`, run `python3 _src/build.py`, and push.
+
+Lead emails use the visitor's address as Reply-To, so you can hit Reply to answer them. A hidden
+spam-trap field drops most bot submissions. If you edit the script later, use Deploy > Manage
+deployments > Edit > New version so the URL stays the same.
+
+## After launch
+
+- Submit `https://hoptoit.events/sitemap.xml` in Google Search Console and Bing Webmaster Tools.
+- Validate a few pages at https://search.google.com/test/rich-results.
 
 ## Contact
 
