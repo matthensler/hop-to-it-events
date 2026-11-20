@@ -66,6 +66,7 @@ GCL_CB = GCL + "/chef-battle/"  # Chef Battle on Global Chef League (cross-link)
 
 # Google Apps Script web app URL (see _src/google-apps-script.gs and README "Leads").
 # Leave empty and forms fall back to opening the visitor's email app.
+INDEXNOW_KEY = "2e45eb2b660f94e5b8ef60ec15b4cceb"  # IndexNow (Bing, Yandex, etc.); key file is written to the site root
 GTM_ID = "GTM-KLKNGPX8"  # Google Tag Manager container (don't also add a GA4 tag inside it)
 GA4_ID = "G-N19S7PLWH4"  # Google Analytics 4 measurement ID
 LEADS_URL = "https://script.google.com/macros/s/AKfycbwmjAIhKdDtkGFeoEN6RQR_A7u6uX6mOk1NcdM7VwKH8TmKuh1J5seDjRJ-FtLqRSQ/exec"
@@ -1437,6 +1438,7 @@ def robots():
         "# Search engines and AI assistants are welcome to crawl and cite this site.\n\n"
         "User-agent: *\nAllow: /\n\n" + blocks + f"Sitemap: {SITE}/sitemap.xml\n")
     print("wrote robots.txt")
+    (ROOT / (INDEXNOW_KEY + ".txt")).write_text(INDEXNOW_KEY)
 
 
 def llms():
