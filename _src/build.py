@@ -62,6 +62,7 @@ UPDATED = "2026-11-19"
 ORG_ID = SITE + "/#organization"
 TICKETS_DONUT_FEST_LV = "https://donutfestvegas2027.eventbrite.com/"
 GCL = "https://globalchefleague.com"
+GCL_CB = GCL + "/chef-battle/"  # Chef Battle on Global Chef League (cross-link)
 
 # Google Apps Script web app URL (see _src/google-apps-script.gs and README "Leads").
 # Leave empty and forms fall back to opening the visitor's email app.
@@ -552,8 +553,9 @@ def chef_battle_feature(team_path):
     return f"""<section class="dark"><div class="wrap tab-panel" style="grid-template-columns:1fr 1fr">
   <div><span class="eyebrow">Team-building feature</span>
     <h2 class="h2" style="margin-bottom:18px">Chef Battle, Built for Your Team</h2>
-    <p class="lede" style="margin-bottom:24px">Chef Battle is the live culinary competition we produce in 20+ cities. For companies, we scale it into a team cook-off: groups collaborate, create dishes and compete for bragging rights while everyone else cheers them on.</p>
-    <a class="btn btn-pink" href="{link(team_path)}">Explore Team Building</a></div>
+    <p class="lede" style="margin-bottom:24px"><a href="{GCL_CB}" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">Chef Battle</a> is the live culinary competition we produce in 20+ cities with the Global Chef League. For companies, we scale it into a team cook-off: groups collaborate, create dishes and compete for bragging rights while everyone else cheers them on.</p>
+    <div class="hero-actions"><a class="btn btn-pink" href="{link(team_path)}">Explore Team Building</a>
+    <a class="btn btn-gold" href="{GCL_CB}" target="_blank" rel="noopener">See Chef Battle Events</a></div></div>
   {ph("Chef Battle live round", "", "min-height:320px")}
 </div></section>"""
 
@@ -1104,7 +1106,7 @@ def home():
                  ("Dessert Fest", "&#129473;", "Licensable", "gold", "Sweet treats festival"),
                  ("Bartender Battle", "&#127864;", "Team building", "teal", "Mixology competition"),
                  ("Wing Fest", "&#127831;", "Festival", "pink", "Wing festival")]
-    tiles = "".join(f'<a class="brand-tile reveal" href="{link("events/")}"><span class="flag {c}">{f}</span><div class="emo" aria-hidden="true">{e}</div><h3>{n}</h3><p>{s}</p></a>'
+    tiles = "".join(f'<a class="brand-tile reveal" href="{GCL_CB if n == "Chef Battle" else link("events/")}"{' target="_blank" rel="noopener"' if n == "Chef Battle" else ""}><span class="flag {c}">{f}</span><div class="emo" aria-hidden="true">{e}</div><h3>{n}</h3><p>{s}</p></a>'
                     for n, e, f, c, s in signature)
     faqs = [("What does Hop To It Events do?", ORG_DESC),
             ("What types of events does Hop To It Events plan?", "Corporate events, employee appreciation events, company picnics, team building, brand activations, trade show activations, grand openings and product launches, festivals and community events, fundraisers, private parties and food truck catering."),
@@ -1198,7 +1200,7 @@ def events():
     title = "Food & Drink Festivals and Signature Events | Hop To It Events"
     desc = "Chef Battle, Donut Fest, Bartender Battle and 12 more food and drink festivals in 30+ U.S. markets. Get tickets, sponsor, vend or bring an event to your city."
     brands = [("Donut Fest", "&#127849;", "Donut Festival", "sweets", "Flagship", TICKETS_DONUT_FEST_LV),
-              ("Chef Battle", "&#128298;", "Culinary Competition", "savory competitions", "Flagship", GCL),
+              ("Chef Battle", "&#128298;", "Culinary Competition", "savory competitions", "Flagship", GCL_CB),
               ("Bartender Battle", "&#127864;", "Mixology Competition", "drinks competitions", "", "bar-beverage-services/"),
               ("Wine Bash", "&#127863;", "Wine Tasting", "drinks", "", ""),
               ("Wing Fest", "&#127831;", "Wing Festival", "savory", "", ""),
@@ -1275,7 +1277,7 @@ def events():
   <div class="dates">
     <div class="date-row"><div class="d"><small>Jan &ndash; Mar 2027</small><b>23</b></div><div class="e" aria-hidden="true">&#128298;</div>
       <h3>Chef Battle California Tour<small>Live culinary competitions in 25 California markets</small></h3><span class="loc">California</span>
-      <a class="btn btn-pink btn-sm" href="{GCL}" target="_blank" rel="noopener">Details</a></div>
+      <a class="btn btn-pink btn-sm" href="{GCL_CB}" target="_blank" rel="noopener">Details</a></div>
     <div class="date-row"><div class="d"><small>Jan 2027</small><b>24</b></div><div class="e" aria-hidden="true">&#127849;</div>
       <h3>Donut Fest Las Vegas<small>Saturday, January 24, 2027 &middot; 12&ndash;5 PM</small></h3><span class="loc">Las Vegas</span>
       <a class="btn btn-pink btn-sm" href="{TICKETS_DONUT_FEST_LV}" target="_blank" rel="noopener">Get tickets</a></div>
@@ -1468,7 +1470,7 @@ def llms():
               f"- [Donut Fest Las Vegas sponsorship]({SITE}/donutfestvegas.html)", "",
               "## Upcoming events", "",
               f"- Donut Fest Las Vegas: Saturday, January 24, 2027, 12-5 PM. Tickets: {TICKETS_DONUT_FEST_LV}",
-              f"- Chef Battle California Tour: January-March 2027 across 25 California markets. Details: {GCL}", ""]
+              f"- Chef Battle California Tour: January-March 2027 across 25 California markets. Details: {GCL_CB}", ""]
     (ROOT / "llms.txt").write_text("\n".join(lines))
     print("wrote llms.txt")
 
