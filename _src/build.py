@@ -805,6 +805,7 @@ def city_hub(c):
     url = SITE + "/" + base
     crumbs = [("Home", ""), ("Locations", "locations/"), (c["city"], base)]
     pages_sorted = sorted(c["pages"], key=lambda p: p["phase"])
+    hero_img = ph(h["photo"], "", "width:100%;min-height:440px", eager=True)  # claim the hero photo before the cards
     cards = ""
     for i, p in enumerate(pages_sorted):
         cards += (f'<a class="card card-link reveal" href="{link(base + p["slug"] + "/")}">{ph(p["photo"], TONES[i % len(TONES)])}'
@@ -820,7 +821,7 @@ def city_hub(c):
     <p class="lede">{esc(h["intro"])}</p>
     <div class="hero-actions"><a class="btn btn-pink" href="#inquiry">{esc(h["cta"])}</a><a class="link-arrow" href="#services">Services in {esc(c["short"])} &rarr;</a></div>
   </div>
-  <div class="hero-side" style="width:100%">{ph(h["photo"], "", "width:100%;min-height:440px", eager=True)}</div>
+  <div class="hero-side" style="width:100%">{hero_img}</div>
 </div></section>
 
 {calc_widget("corporate", f'{c["city"]}, {c["state"]}', f'What Will Your {c["city"]} Event Cost?')}
