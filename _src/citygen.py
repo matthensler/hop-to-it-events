@@ -7,6 +7,7 @@ claims only appear when the market data says they're true (worked / note).
 """
 import zlib
 
+import citydata2  # noqa: F401  (registers batch 2)
 from citydata import C as DATA
 
 
@@ -14,7 +15,8 @@ def lst(items, n=None):
     items = list(items)[:n] if n else list(items)
     if len(items) <= 1:
         return "".join(items)
-    return ", ".join(items[:-1]) + " and " + items[-1]
+    sep = ", and " if any(" and " in i for i in items) else " and "
+    return ", ".join(items[:-1]) + sep + items[-1]
 
 
 def pick(slug, key, options):
@@ -42,7 +44,7 @@ def proof(d):
 
 def faq_lead(d, what="events"):
     return (f"How far ahead should we plan {what} in {d['city']}?",
-            f"For most {what}, start 6–10 weeks out, and earlier for dates in {d['outdoor']}, which is peak outdoor season in {d['city']}. "
+            f"For most {what if what.endswith('s') else what.removeprefix('a ').removeprefix('an ') + 's'}, start 6–10 weeks out, and earlier for dates in {d['outdoor']}, which is peak outdoor season in {d['city']}. "
             + (f"Dates that overlap with major events at {d['convention']} or big local weekends fill venues and hotels quickly. " if d["convention"] else
                "Popular weekends and holiday dates fill quickly. ")
             + "Share your target date and we'll tell you what's realistic.")
@@ -282,7 +284,7 @@ def svc_pages(d):
 
     pages.append(dict(
         slug="company-picnics", national="company-picnics", name="Company Picnics",
-        card=f"Outdoor celebrations in {d['outdoor']} with food, games and entertainment.",
+        card=f"Outdoor celebrations with food, games and entertainment, best from {d['outdoor']}.",
         title=f"Company Picnic Planning {city} | Hop To It Events",
         meta=f"Company picnic planning in {city}: venues, food trucks, games and entertainment for employee and family picnics across {d['region']}.",
         h1=pick(slug, "cp", [f"{city} Company Picnics Worth *Looking Forward To.*",
